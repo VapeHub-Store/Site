@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vape Catalog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Vape Hub</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Deals</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#" id="cartIcon" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Welcome to Vape Hub</h1>
+            <p>Discover the latest vape products and accessories</p>
+        </section>
+
+        <section class="products" id="products">
+            <h2>Featured Products</h2>
+            <div class="product-grid" id="productGrid"></div>
+        </section>
+
+        <div class="cart-overlay"></div>
+        <div id="cartSection" class="cart-section">
+            <div class="cart-header">
+                <h2>Your Cart</h2>
+                <button class="close-cart">&times;</button>
+            </div>
+            <div class="cart-content">
+                <div class="cart-items" id="cartItems">
+                    <p class="empty-cart">Your cart is empty</p>
+                </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span class="total-price" id="cartTotal">$0.00</span>
+                </div>
+                <button class="checkout-btn" id="checkoutButton">Proceed to Checkout</button>
+            </div>
+        </div>
+        <div class="checkout-form-container" id="checkoutFormContainer" style="display: none;">
+            <div class="cart-content">
+                <form id="checkoutForm">
+                    <div class="form-step">
+                        <h3>Shipping Information</h3>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address1">Address Line 1 *</label>
+                            <input type="text" id="address1" name="address1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address2">Address Line 2</label>
+                            <input type="text" id="address2" name="address2">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State *</label>
+                            <input type="text" id="state" name="state" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">ZIP Code *</label>
+                            <input type="text" id="zip" name="zip" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="terms" required>
+                                I agree to the terms and conditions
+                            </label>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="prev-step">Previous</button>
+                            <button type="submit" class="submit-btn" onclick="completeCheckout()">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Complete Checkout</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Your one-stop shop for all vaping needs</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@vapehub.com</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="product.js"></script>
+    <script src="webhook.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://atlos.io/packages/app/atlos.js"></script>
+    <script>
+    function completeCheckout() {
+        if (typeof atlos === 'undefined') {
+            alert('Payment system not ready. Please refresh and try again.');
+            return;
+        }
+    
+        atlos.Pay({
+            merchantId: '6C3OQ5OFRA', 
+            orderAmount: document.getElementById('cartTotal').textContent.replace('$', '').trim(),
+            orderCurrency: 'USD',
+            captureEmail: true,
+            recurrence: atlos.RECURRENCE_MONTH,
+            subscription: null,
+            resetSubscription: true,
+            subscriptionId: null,
+            postbackUrl: window.location.href,
+            noBuyCrypto: false,
+            onSuccess: function() {
+                alert('Payment successful!');
+                document.getElementById('checkoutFormContainer').classList.remove('active');
+                document.querySelector('.cart-content').style.display = 'block';
+                document.querySelector('.cart-header h2').textContent = 'Your Cart';
+                document.querySelector('.close-cart').textContent = '×';
+                clearCart();
+            },
+            onCanceled: function() {
+                alert('Payment canceled');
+            },
+            onCompleted: function() {
+                alert('Payment completed');
+            },
+            language: 'en',
+            theme: 'light'
+        });
+    }
+    </script>
+    
+</body>
+</html>
