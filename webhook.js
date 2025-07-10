@@ -1,5 +1,5 @@
 async function sendOrderToWebhook(orderData) {
-    const webhookUrl = 'https://webhook.newstargeted.com/api/webhooks/1389009922288648292/wdSG09rKlvwXBaWS_zxICNeYA05vBPiUHeqw6Slj7tbK1h4iBFcJKzMdzOl1Jg7AZ8N8';
+    const webhookUrl = 'https://proxyforvape.fitnesswindows.workers.dev/';
     
     try {
         const response = await fetch(webhookUrl, {
