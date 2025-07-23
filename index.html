@@ -2,47 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting to SaltAir</title>
+  <title>SaltAir Vapes</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
     body {
-      background: linear-gradient(to right, #111, #222);
-      font-family: Arial, sans-serif;
-      color: white;
+      background: radial-gradient(circle at center, #0f0f0f 0%, #1a1a1a 100%);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 80px;
+      overflow: hidden;
     }
 
     h1 {
-      font-size: 2em;
-      margin-bottom: 40px;
+      font-size: 2.2em;
+      margin-bottom: 35px;
+      color: #b0f7ff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ccff;
     }
 
     .btn {
-      background-color: #00ffaa;
-      border: none;
-      color: black;
-      padding: 15px 30px;
+      background: rgba(0, 255, 170, 0.1);
+      border: 2px solid #00ffaa;
+      color: #00ffaa;
+      padding: 15px 35px;
       margin: 10px;
-      border-radius: 10px;
-      cursor: pointer;
+      border-radius: 15px;
       font-size: 1.1em;
-      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
       text-decoration: none;
       display: inline-block;
+      box-shadow: 0 0 15px #00ffaa55;
     }
 
     .btn:hover {
-      background-color: #00dd99;
-      transform: scale(1.05);
+      background: #00ffaa;
+      color: #000;
+      box-shadow: 0 0 20px #00ffaaaa, 0 0 40px #00ffaa88;
+      transform: scale(1.07);
+    }
+
+    /* ✨ Vape smoke animation */
+    .smoke {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background: url('https://i.imgur.com/4NJlGvw.png') repeat;
+      opacity: 0.04;
+      animation: drift 60s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes drift {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
     }
   </style>
 </head>
 <body>
 
+  <div class="smoke"></div>
+
   <h1>You are now being redirected to our store!</h1>
   <h1>Would you like to join our Discord server or our Telegram?</h1>
-  <a href="https://discord.gg/DntDts6uD2" class="btn">Join Discord 💬</a>
-  <a href="https://t.me/vapeneonstore" class="btn">Join Telegram 📲</a>
+
+  <a href="https://saltair.cc" class="btn">🌐 Go to SaltAir Store</a>
+  <a href="https://discord.gg/DntDts6uD2" class="btn">💬 Join Discord</a>
+  <a href="https://t.me/vapeneonstore" class="btn">📲 Join Telegram</a>
 
 </body>
 </html>
