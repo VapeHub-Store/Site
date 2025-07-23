@@ -25,6 +25,12 @@
       pointer-events: none;
     }
 
+    #video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .overlay {
       position: relative;
       z-index: 1;
@@ -62,8 +68,6 @@
       transform: scale(1.07);
     }
 
-    /* 🔥 Optional subtle smoke overlay for extra vibe */
-
     @keyframes drift {
       0% { background-position: 0 0; }
       100% { background-position: 1000px 1000px; }
@@ -72,16 +76,12 @@
 </head>
 <body>
 
-  <!-- 🎥 YouTube Background -->
+  <!-- 🎥 MP4 Background -->
   <div id="video-bg">
-    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/9XCyKtFsYbg?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=9XCyKtFsYbg"
-      frameborder="0"
-      allow="autoplay; encrypted-media"
-      allowfullscreen>
-    </iframe>
+    <video autoplay muted loop playsinline>
+      <source src="https://files.catbox.moe/s7bvbz.mp4" type="video/mp4">
+    </video>
   </div>
-
-  <!-- 🌫 Vape Smoke Overlay -->
 
   <!-- ☁️ Main Content -->
   <div class="overlay">
